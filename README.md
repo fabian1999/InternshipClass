@@ -27,7 +27,7 @@ to remove container
 ```
 docker rm mvc_container
 ```
-//
+
 ## Deploy to heroku
 
 1. Create heroku account
