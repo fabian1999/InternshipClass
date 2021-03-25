@@ -2,8 +2,8 @@
 
     $(".remove").click(function () {
 
-        var listItem = $("i").parent().index();
-        var className = $("i").parent().attr("id");
+        var listItem = $(this).parent('li').index();
+        var className = $(this).parent('li').attr("id");
 
         console.log(listItem);
         console.log(className);
