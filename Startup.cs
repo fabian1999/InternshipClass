@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace RazorMvc
 {
-    public class Startup;
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
