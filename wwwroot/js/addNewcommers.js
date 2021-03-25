@@ -9,8 +9,10 @@ $(document).ready(function () {
 
         $("#newcomer").val("");
 
-        $("#clear").click(function () {
-            $("#newcomer").val("");
-        })
+        
+    })
+
+    $("#clear").click(function () {
+        $("#newcomer").val("");
     })
 });
