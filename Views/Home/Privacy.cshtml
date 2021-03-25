@@ -1,6 +1,12 @@
 @{
     ViewData["Title"] = "Internship Landpage";
 }
+
+@section styles {
+    <!-- Read about this here https://fontawesome.com/icons?d=gallery&p=2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+
 @section scripts {
     <script type="text/javascript" src="~/js/addNewcommers.js"></script>
 }
@@ -20,15 +26,21 @@
                 var member = Model.Members[i];
 
                 <li class="member">
-                    @member
+                    <span class="name">@member</span><span class="delete fa fa-pencil"></span><i class="fa fa-remove"></i>
                 </li>
             }
         </ul>
     </div>
 
     <input id="newcomer" title="Name" type="text" />
-    <button id="add" class="btn btn-primary">Add new commer</button>
-    <button id="clear" class="btn btn-secondary"> Clear</button>
+    <button id="add" class="btn btn-primary">
+        <i class="fa fa-plus-circle"></i>
+        Add new commer
+    </button>
+    <button id="clear" class="btn btn-secondary">
+        <i class="fa fa-cut"></i>
+        Clear
+    </button>
     <p><img src="/Images/GoodCodeRules.png" height="500" width="500" /></p>
     <script src="/js/addNewcommers.js"></script>
 </body>
