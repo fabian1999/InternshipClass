@@ -11,10 +11,13 @@ namespace RazorMvc.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly InternshipClass _internshipClass;
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
+            _internshipClass = new InternshipClass();
             _logger = logger;
         }
 
@@ -25,7 +28,7 @@ namespace RazorMvc.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            return View(_internshipClass);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
