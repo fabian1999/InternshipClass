@@ -4,7 +4,7 @@ namespace RazorMvc.Services
 {
     public class InternshipService
     {
-        private readonly InternshipClass _internshipClass = new();
+        private readonly InternshipClass _internshipClass = new ();
 
         public void RemoveMember(int index)
         {
