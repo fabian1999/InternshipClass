@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RazorMvc.Models;
@@ -35,6 +33,19 @@ namespace RazorMvc.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpDelete]
+        public void RemoveMember(int index)
+        {
+            _internshipClass.Members.RemoveAt(index);
+        }
+
+        [HttpGet]
+        public string AddMember(string member)
+        {
+            _internshipClass.Members.Add(member);
+            return member;
         }
     }
 }
