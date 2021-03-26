@@ -9,7 +9,8 @@ $(document).ready(function () {
             url: `/Home/AddMember?member=${newcomerName}`,
             success: function (data) {
                 // Remember string interpolation
-                $("#list").append(`<li>${data}<span class="fa fa-pencil"></span><i class="fa fa-remove remove"></i></li>`);
+                $("#list").append(`<li class="member"><span class="name">${data}</span><span class="remove fa fa-remove"></span><i class="startEdit fa fa-pencil" data-toggle="modal" data-target="#editClassmate"></i>
+		        </li>`);
 
                 $("#newcomer").val("");
             },

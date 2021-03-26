@@ -1,27 +1,35 @@
 ﻿$(document).ready(function () {
 
-    $("#list").on("click", ".remove", function () {
+    $("#list").on("click", ".startEdit", function () {
+        var targetMemberTag = $(this).closest('li');
+        var index = targetMemberTag.index();
+        var currentName = targetMemberTag.find(".name").text();
+        $('#editClassmate').attr("memberIndex", index);
+        $('#classmateName').val(currentName);
+    })
 
-        $("#list").append(`<li class="member"><span class="name">${data}</span><span class="delete fa fa-remove"></span><i class="startEdit fa fa-pencil" data-toggle="modal" data-target="#editClassmate"></i>
-		        </li>`);
+    $("#editClassmate").on("click", "#submit", function () {
+        console.log('submit changes to server');
 
-        $("#newcomer").val("");
+        var newName = $('#classmateName').val();
+        var index = $('#editClassmate').attr("memberIndex");
 
-        $("#list").on("click", ".startEdit", function () {
-            var targetMemberTag = $(this).closest('li');
-            var index = targetMemberTag.index(targetMemberTag.parent());
-            var currentName = targetMemberTag.find(".name").text();
-            $('#editClassmate').attr("memberIndex", index);
-            $('#classmateName').val(currentName);
-        })
+        console.log(`/Home/UpdateMember?index=${index}&name=${newName}`);
 
-        $("#editClassmate").on("click", "#submit", function () {
-            console.log('submit changes to server');
-        })
+        $.ajax({
+            method: "PUT",
+            url: `/Home/UpdateMember?index=${index}&name=${newName}`,
+            success: function (data) {
 
-        $("#editClassmate").on("click", "#cancel", function () {
-            console.log('cancel changes');
-        })
+            },
+            error: function (data) {
+                alert(`Failed to update`);
+            },
+        });
+    })
+
+    $("#editClassmate").on("click", "#cancel", function () {
+        console.log('cancel changes');
     })
 
 });

@@ -45,5 +45,11 @@ namespace RazorMvc.Controllers
         {
             return internshipService.AddMember(member);
         }
+
+        [HttpPut]
+        public void UpdateMember(int index, string name)
+        {
+            internshipService.UpdateMember(index, name);
+        }
     }
 }

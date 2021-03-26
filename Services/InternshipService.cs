@@ -17,6 +17,11 @@ namespace RazorMvc.Services
             return member;
         }
 
+        public void UpdateMember(int index, string name)
+        {
+            _internshipClass.Members[index] = name;
+        }
+
         public InternshipClass GetClass()
         {
             return _internshipClass;
