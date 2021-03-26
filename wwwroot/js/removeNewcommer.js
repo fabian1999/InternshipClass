@@ -1,21 +1,20 @@
 ﻿$(document).ready(function () {
 
-    $(".remove").click(function () {
+    $("#list").on("click", ".remove", function () {
 
-        var listItem = $(this).parent('li').index();
-        var className = $(this).parent('li').attr("id");
+        var $li = $(this).parent('li');
+        var index = $li.index();
 
-        console.log(listItem);
-        console.log(className);
+        console.log(`index=${index}`);
+        console.log(`$li=${$li}`);
 
         $.ajax({
             method: "DELETE",
-            url: `/Home/RemoveMember?index=${listItem}`,
+            url: `/Home/RemoveMember?index=${index}`,
             success: function (data) {
-                // Remember string interpolation
-                $("#" + className).remove();
 
-                //$("#newcomer").val("");
+                $li.remove();
+
             },
             error: function (data) {
                 alert(`Failed to remove`);
