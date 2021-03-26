@@ -2,7 +2,7 @@
 
     $("#list").on("click", ".remove", function () {
 
-        var $li = $(this).parent('li');
+        var $li = $(this).closest('li');
         var index = $li.index();
 
         console.log(`index=${index}`);
