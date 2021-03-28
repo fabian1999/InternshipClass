@@ -20,7 +20,7 @@
             method: "PUT",
             url: `/Home/UpdateMember?index=${index}&name=${newName}`,
             success: function (data) {
-
+                $('.name').eq(index).replaceWith(newName);
             },
             error: function (data) {
                 alert(`Failed to update`);
