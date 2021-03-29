@@ -23,6 +23,10 @@ namespace RazorMvc.WebAPI.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Getting Weather Forecast for five days.
+        /// </summary>
+        /// <returns>Enumerable of weatherForecast objects.</returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
