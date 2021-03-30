@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace RazorMvc.WebAPI
 {
@@ -9,5 +10,11 @@ namespace RazorMvc.WebAPI
         public int TemperatureC { get; set; }
 
         public string Summary { get; set; }
+        public double TemperatureK 
+        { 
+            get {
+                return TemperatureC + 273.15;
+                }
+        }
     }
 }
