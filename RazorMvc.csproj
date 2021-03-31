@@ -7,13 +7,17 @@
   <ItemGroup>
     <Compile Remove="out\**" />
     <Compile Remove="RazorMvc.Tests\**" />
+    <Compile Remove="RazorMvc.WebAPI\**" />
     <Content Remove="out\**" />
     <Content Remove="RazorMvc.Tests\**" />
+    <Content Remove="RazorMvc.WebAPI\**" />
     <EmbeddedResource Remove="out\**" />
     <EmbeddedResource Remove="RazorMvc.Tests\**" />
+    <EmbeddedResource Remove="RazorMvc.WebAPI\**" />
     <None Remove="*.log" />
     <None Remove="out\**" />
     <None Remove="RazorMvc.Tests\**" />
+    <None Remove="RazorMvc.WebAPI\**" />
   </ItemGroup>
   
   <ItemGroup>

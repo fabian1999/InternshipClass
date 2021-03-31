@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RazorMvc.Utilities;
 using RestSharp;
 
 namespace RazorMvc.WebAPI.Controllers
@@ -54,7 +57,27 @@ namespace RazorMvc.WebAPI.Controllers
 
         private IList<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
         {
-            throw new NotImplementedException();
+            var json = JObject.Parse(content);
+            var jsonArray = json["daily"];
+            IList<WeatherForecast> weatherForecasts = new List<WeatherForecast>();
+            foreach (var item in jsonArray)
+            {
+                WeatherForecast obj = new WeatherForecast();
+                obj.Date = DateTimeConverter.ConvertEpochToDateTime(item.Value<long>("dt"));
+                obj.TemperatureK = item.SelectToken("temp").Value<double>("day");
+                obj.Summary = item.SelectToken("weather")[0].Value<string>("main");
+
+                try
+                {
+                    weatherForecasts.Add(obj);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+
+            return weatherForecasts;
         }
     }
 }
