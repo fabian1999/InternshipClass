@@ -41,14 +41,12 @@ namespace RazorMvc.Tests
         {
             // Assume
             //https://api.openweathermap.org/data/2.5/onecall?lat=45.75&lon=25.3333&exclude=hourly,minutely&appid=c8faf2bb86a7652b7567d6de3e7dbfa1
-            var lat = 45.75;
-            var lon = 25.3333;
-            var APIKey = "c8faf2bb86a7652b7567d6de3e7dbfa1";
+   
             Microsoft.Extensions.Logging.ILogger<WeatherForecastController> nullLogger = new NullLogger<WeatherForecastController>();
             var weatherForecastController = new WeatherForecastController(nullLogger, configuration);
 
             // Act
-            var weatherForecasts = weatherForecastController.FetchWeatherForecasts(lat, lon, APIKey);
+            var weatherForecasts = weatherForecastController.FetchWeatherForecasts();
             WeatherForecast weatherForecastForTommorow = weatherForecasts[1];
 
             // Assert
