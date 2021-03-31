@@ -39,7 +39,7 @@ namespace RazorMvc.WebAPI.Controllers
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
+                TemperatureK = rng.Next(250, 320),
                 Summary = Summaries[rng.Next(Summaries.Length)],
             })
             .ToArray();
