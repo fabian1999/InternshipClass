@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,10 +22,12 @@ namespace RazorMvc.WebAPI.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IConfiguration configuration;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            this.configuration = configuration;
         }
 
         /// <summary>
@@ -34,18 +37,15 @@ namespace RazorMvc.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
+            double lat = double.Parse(configuration["WeatherForecast:Latitude"]);
+            double lon = double.Parse(configuration["WeatherForecast:Longitude"]);
+            var apiKey = configuration["WeatherForecast:ApiKey"];
+            var weatherForecasts = FetchWeatherForecasts(lat, lon, apiKey);
 
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureK = rng.Next(250, 320),
-                Summary = Summaries[rng.Next(Summaries.Length)],
-            })
-            .ToArray();
+            return weatherForecasts.GetRange(1, 5);
         }
 
-        public IList<WeatherForecast> FetchWeatherForecasts(double lat, double lon, string apiKey)
+        public List<WeatherForecast> FetchWeatherForecasts(double lat, double lon, string apiKey)
         {
             var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;
@@ -55,11 +55,11 @@ namespace RazorMvc.WebAPI.Controllers
             return ConvertResponseContentToWeatherForecastList(response.Content);
         }
 
-        public IList<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
+        public List<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
         {
             var json = JObject.Parse(content);
             var jsonArray = json["daily"];
-            IList<WeatherForecast> weatherForecasts = new List<WeatherForecast>();
+            var weatherForecasts = new List<WeatherForecast>();
             foreach (var item in jsonArray)
             {
                 WeatherForecast obj = new WeatherForecast();
