@@ -19,12 +19,8 @@ namespace RazorMvc.WebAPI
 
         public double TemperatureK
         {
-            get
-            {
-                return TemperatureC + 273.15;
-            }
+            get; set;
 
-            set { }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace RazorMvc.WebAPI.Controllers
             return ConvertResponseContentToWeatherForecastList(response.Content);
         }
 
-        private IList<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
+        public IList<WeatherForecast> ConvertResponseContentToWeatherForecastList(string content)
         {
             var json = JObject.Parse(content);
             var jsonArray = json["daily"];
