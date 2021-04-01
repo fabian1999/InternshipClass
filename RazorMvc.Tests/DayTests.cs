@@ -55,7 +55,7 @@ namespace RazorMvc.Tests
         public void ConvertWeatherJsonToWeatherForecast()
         {
             // Assume
-            string content = File.ReadAllText(@"C:\Training\DotNet\RazorMvc\RazorMvc.Tests\weatherForecast.json");
+            string content = File.ReadAllText("weatherForecast.json");
             WeatherForecastController weatherForecastController = InstantiateWeatherForecastController();
 
             // Act
