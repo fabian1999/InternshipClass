@@ -4,11 +4,7 @@ using RazorMvc.Utilities;
 using RazorMvc.WebAPI;
 using RazorMvc.WebAPI.Controllers;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SR = System.IO.StreamReader;
 using Xunit;
 
 namespace RazorMvc.Tests
@@ -71,7 +67,7 @@ namespace RazorMvc.Tests
         {
             var assembly = this.GetType().Assembly;
             using var stream = assembly.GetManifestResourceStream("RazorMvc.Tests.weatherForecast.json");
-            StreamReader streamReader = new StreamReader(stream);
+            SR streamReader = new SR(stream);
 
             var streamReaderLines = "";
 
