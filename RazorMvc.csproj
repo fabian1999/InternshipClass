@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
     <Compile Remove="out\**" />
     <Compile Remove="RazorMvc.Tests\**" />
     <Compile Remove="RazorMvc.WebAPI\**" />
@@ -18,6 +19,14 @@
     <None Remove="out\**" />
     <None Remove="RazorMvc.Tests\**" />
     <None Remove="RazorMvc.WebAPI\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
   </ItemGroup>
   
   <ItemGroup>
