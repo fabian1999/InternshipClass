@@ -54,8 +54,9 @@ namespace RazorMvc.Tests
         [Fact]
         public void ConvertWeatherJsonToWeatherForecast()
         {
+
             // Assume
-            string content = File.ReadAllText("weatherForecast.json");
+            string content = GetStreamLines();
             WeatherForecastController weatherForecastController = InstantiateWeatherForecastController();
 
             // Act
@@ -64,6 +65,23 @@ namespace RazorMvc.Tests
 
             // Assert
             Assert.Equal(285.39, weatherForecastForTommorow.TemperatureK);
+        }
+
+        private string GetStreamLines()
+        {
+            var assembly = this.GetType().Assembly;
+            var stream = assembly.GetManifestResourceStream("RazorMvc.Tests.weatherForecast.json");
+            StreamReader streamReader = new StreamReader(stream);
+
+            var streamReaderLines = "";
+
+            while (!streamReader.EndOfStream)
+            {
+                streamReaderLines += streamReader.ReadLine();
+            }
+
+            streamReader.Close();
+            return streamReaderLines;
         }
 
         private WeatherForecastController InstantiateWeatherForecastController()
