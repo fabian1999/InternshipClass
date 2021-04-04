@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using RazorMvc.WebAPI;
+﻿using Microsoft.EntityFrameworkCore;
+using RazorMvc.Models;
 
 namespace RazorMvc.Data
 {
@@ -18,7 +14,7 @@ namespace RazorMvc.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Intern>().ToTable("Intern");
+            modelBuilder.Entity<Intern>().ToTable("Interns");
         }
     }
 }

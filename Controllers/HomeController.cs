@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RazorMvc.Data;
@@ -23,13 +24,13 @@ namespace RazorMvc.Controllers
 
         public IActionResult Index()
         {
-            var interns = db.Interns;
-            return View(interns);
+            return View(internshipService.GetClass());
         }
 
         public IActionResult Privacy()
         {
-            return View(internshipService.GetClass());
+            var interns = db.Interns.ToList();
+            return View(interns);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

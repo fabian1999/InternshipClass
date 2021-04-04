@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace RazorMvc.WebAPI
+namespace RazorMvc.Models
 {
     public class Intern
     {
         public int Id { get; set; }
 
-        public int Name { get; set; }
+        public string Name { get; set; }
 
-        public DateTime RegistrationDateTime { get; set; }
+        public DateTime DateOfJoin { get; set; }
     }
 }
