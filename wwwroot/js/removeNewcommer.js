@@ -1,16 +1,13 @@
 ﻿$(document).ready(function () {
 
-    $("#list").on("click", ".remove", function () {
+    $("#list").on("click", ".delete", function () {
 
         var $li = $(this).closest('li');
-        var index = $li.index();
-
-        console.log(`index=${index}`);
-        console.log(`$li=${$li}`);
+        var id = $li.attr('member-id');
 
         $.ajax({
             method: "DELETE",
-            url: `/Home/RemoveMember?index=${index}`,
+            url: `/Home/RemoveMember?index=${id}`,
             success: function (data) {
 
                 $li.remove();

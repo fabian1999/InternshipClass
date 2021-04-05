@@ -2,9 +2,9 @@
 
     $("#list").on("click", ".startEdit", function () {
         var targetMemberTag = $(this).closest('li');
-        var index = targetMemberTag.index();
+        var id = targetMemberTag.attr('member-id');
         var currentName = targetMemberTag.find(".name").text();
-        $('#editClassmate').attr("memberIndex", index);
+        $('#editClassmate').attr("member-id", id);
         $('#classmateName').val(currentName);
     })
 

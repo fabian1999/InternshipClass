@@ -9,15 +9,26 @@ namespace RazorMvc.Services
     {
         private readonly InternshipClass _internshipClass = new ();
 
-        public void RemoveMember(int index)
+        public void RemoveMember(int id)
         {
-            _internshipClass.Members.RemoveAt(index);
+            var itemToBeDeleted = _internshipClass.Members.Single(_ => _.Id == id);
+            _internshipClass.Members.Remove(itemToBeDeleted);
         }
 
-        public int AddMember(Intern intern)
+        public int AddMember(string memberName)
         {
+            var maxId = _internshipClass.Members.Max(_ => _.Id);
+            var newId = maxId + 1;
+
+            var intern = new Intern()
+            {
+                Id = maxId + 1,
+                Name = memberName,
+                DateOfJoin = DateTime.Now,
+            };
+
             _internshipClass.Members.Add(intern);
-            return intern.Id;
+            return newId;
         }
 
         public void UpdateMember(Intern intern)
@@ -31,9 +42,9 @@ namespace RazorMvc.Services
             return _internshipClass;
         }
 
-        public IList<string> GetMembers()
+        public IList<Intern> GetMembers()
         {
-            return _internshipClass.Members.Select(_ => _.Name).ToList();
+            return _internshipClass.Members;
         }
 
         internal Intern AddMember(int id, string name)

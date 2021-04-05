@@ -36,7 +36,9 @@ namespace RazorMvc.Services
 
         public void RemoveMember(int id)
         {
-            throw new NotImplementedException();
+            var intern = db.Find<Intern>(id);
+            db.Remove<Intern>(intern);
+            db.SaveChanges();
         }
 
         public void UpdateMember(Intern intern)
