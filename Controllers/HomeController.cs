@@ -24,7 +24,7 @@ namespace RazorMvc.Controllers
 
         public IActionResult Index()
         {
-            return View(internshipService.GetClass());
+            return View(internshipService.GetMembers());
         }
 
         public IActionResult Privacy()

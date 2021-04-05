@@ -1,5 +1,7 @@
 ﻿using RazorMvc.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RazorMvc.Services
 {
@@ -20,12 +22,18 @@ namespace RazorMvc.Services
 
         public void UpdateMember(Intern intern)
         {
-            //_internshipClass.Members[];
+            var itemToBeUpdated = _internshipClass.Members.Single(_ => _.Id == intern.Id);
+            itemToBeUpdated.Name = intern.Name;
         }
 
         public InternshipClass GetClass()
         {
             return _internshipClass;
+        }
+
+        public IList<string> GetMembers()
+        {
+            return _internshipClass.Members.Select(_ => _.Name).ToList();
         }
 
         internal Intern AddMember(int id, string name)
