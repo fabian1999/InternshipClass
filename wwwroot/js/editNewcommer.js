@@ -2,9 +2,11 @@
 
     $("#list").on("click", ".startEdit", function () {
         var targetMemberTag = $(this).closest('li');
-        var id = targetMemberTag.attr('member-id');
+        var serverIndex = targetMemberTag.attr('member-id');
+        var clientIndex = targetMemberTag.index();
         var currentName = targetMemberTag.find(".name").text();
-        $('#editClassmate').attr("member-id", id);
+        $('#editClassmate').attr("member-id", serverIndex);
+        $('#editClassmate').attr("memberIndex", clientIndex);
         $('#classmateName').val(currentName);
     })
 
@@ -12,19 +14,18 @@
         console.log('submit changes to server');
 
         var newName = $('#classmateName').val();
+        var id = $('#editClassmate').attr("member-id");
         var index = $('#editClassmate').attr("memberIndex");
 
-        console.log(`/Home/UpdateMember?index=${index}&name=${newName}`);
-
         $.ajax({
-            method: "PUT",
-            url: `/Home/UpdateMember?index=${index}&name=${newName}`,
-            success: function (data) {
+            url: `/Home/UpdateMember?id=${id}&memberName=${newName}`,
+            type: "PUT",
+            success: function (response) {
                 $('.name').eq(index).replaceWith(newName);
             },
             error: function (data) {
                 alert(`Failed to update`);
-            },
+            }
         });
     })
 

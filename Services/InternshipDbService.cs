@@ -43,7 +43,8 @@ namespace RazorMvc.Services
 
         public void UpdateMember(Intern intern)
         {
-            throw new NotImplementedException();
+            db.Interns.Update(intern);
+            db.SaveChanges();
         }
     }
 }

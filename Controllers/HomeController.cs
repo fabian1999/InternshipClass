@@ -60,6 +60,7 @@ namespace RazorMvc.Controllers
             Intern intern = new Intern();
             intern.Id = id;
             intern.Name = memberName;
+            intern.DateOfJoin = DateTime.Now;
             internshipService.UpdateMember(intern);
         }
     }
