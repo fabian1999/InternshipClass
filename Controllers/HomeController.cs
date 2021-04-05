@@ -46,15 +46,20 @@ namespace RazorMvc.Controllers
         }
 
         [HttpGet]
-        public string AddMember(string member)
+        public int AddMember(string memberName)
         {
-            return internshipService.AddMember(member);
+            Intern intern = new Intern();
+            intern.Name = memberName;
+            return internshipService.AddMember(intern);
         }
 
         [HttpPut]
-        public void UpdateMember(int index, string name)
+        public void UpdateMember(int id, string memberName)
         {
-            internshipService.UpdateMember(index, name);
+            Intern intern = new Intern();
+            intern.Id = id;
+            intern.Name = memberName;
+            internshipService.UpdateMember(intern);
         }
     }
 }

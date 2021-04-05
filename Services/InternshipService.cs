@@ -1,4 +1,5 @@
 ﻿using RazorMvc.Models;
+using System;
 
 namespace RazorMvc.Services
 {
@@ -11,20 +12,25 @@ namespace RazorMvc.Services
             _internshipClass.Members.RemoveAt(index);
         }
 
-        public string AddMember(string member)
+        public int AddMember(Intern intern)
         {
-            _internshipClass.Members.Add(member);
-            return member;
+            _internshipClass.Members.Add(intern);
+            return intern.Id;
         }
 
-        public void UpdateMember(int index, string name)
+        public void UpdateMember(Intern intern)
         {
-            _internshipClass.Members[index] = name;
+            //_internshipClass.Members[];
         }
 
         public InternshipClass GetClass()
         {
             return _internshipClass;
+        }
+
+        internal Intern AddMember(int id, string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }
