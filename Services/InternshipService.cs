@@ -9,11 +9,6 @@ namespace RazorMvc.Services
     {
         private readonly InternshipClass _internshipClass = new ();
 
-        public InternshipClass GetClass()
-        {
-            return _internshipClass;
-        }
-
         public Intern AddMember(Intern member)
         {
 
