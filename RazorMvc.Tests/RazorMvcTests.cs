@@ -32,7 +32,7 @@ namespace RazorMvc.Tests
 
             // Assert
             Assert.Equal(4, intershipService.GetMembers().Count);
-            Assert.Contains("Marko", intershipService.GetMembers());
+            Assert.Contains("Marko", intershipService.GetClass().Members.Select(member => member.Name));
         }
     }
 }

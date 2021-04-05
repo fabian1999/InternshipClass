@@ -1,34 +1,30 @@
-﻿using RazorMvc.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RazorMvc.Models;
 
 namespace RazorMvc.Services
 {
-    public class InternshipService
+    public class InternshipService : IInternshipService
     {
         private readonly InternshipClass _internshipClass = new ();
+
+        public InternshipClass GetClass()
+        {
+            return _internshipClass;
+        }
+
+        public Intern AddMember(Intern member)
+        {
+
+            _internshipClass.Members.Add(member);
+            return member;
+        }
 
         public void RemoveMember(int id)
         {
             var itemToBeDeleted = _internshipClass.Members.Single(_ => _.Id == id);
             _internshipClass.Members.Remove(itemToBeDeleted);
-        }
-
-        public int AddMember(string memberName)
-        {
-            var maxId = _internshipClass.Members.Max(_ => _.Id);
-            var newId = maxId + 1;
-
-            var intern = new Intern()
-            {
-                Id = maxId + 1,
-                Name = memberName,
-                DateOfJoin = DateTime.Now,
-            };
-
-            _internshipClass.Members.Add(intern);
-            return newId;
         }
 
         public void UpdateMember(Intern intern)
@@ -37,19 +33,9 @@ namespace RazorMvc.Services
             itemToBeUpdated.Name = intern.Name;
         }
 
-        public InternshipClass GetClass()
-        {
-            return _internshipClass;
-        }
-
         public IList<Intern> GetMembers()
         {
             return _internshipClass.Members;
-        }
-
-        internal Intern AddMember(int id, string name)
-        {
-            throw new NotImplementedException();
         }
     }
 }
