@@ -16,11 +16,10 @@ namespace RazorMvc.Controllers
         private readonly IInternshipService internshipService;
         private readonly InternDbContext db;
 
-        public HomeController(ILogger<HomeController> logger, IInternshipService internshipService, InternDbContext db)
+        public HomeController(ILogger<HomeController> logger, IInternshipService internshipService)
         {
             this.internshipService = internshipService;
             _logger = logger;
-            this.db = db;
         }
 
         public IActionResult Index()
@@ -30,7 +29,7 @@ namespace RazorMvc.Controllers
 
         public IActionResult Privacy()
         {
-            var interns = db.Interns.ToList();
+            var interns = internshipService.GetMembers();
             return View(interns);
         }
 
