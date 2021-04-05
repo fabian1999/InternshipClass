@@ -1,4 +1,4 @@
-﻿@model IList<string>
+﻿@model IList<Intern>
 
 @{ ViewData["Title"] = "Information about our classroom"; }
 
@@ -50,7 +50,7 @@
 
         <li class="member">
             <div class="memberInfo">
-                <span class="name">@member</span><i class="delete fa fa-remove"></i>
+                <span class="name">@member.Name</span><i class="delete fa fa-remove"></i>
                 <i class="startEdit fa fa-pencil" data-toggle="modal" data-target="#editClassmate"></i>
             </div>
         </li>
