@@ -3,12 +3,14 @@ using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RazorMvc.Data;
+using RazorMvc.Hubs;
 using RazorMvc.Services;
 
 namespace RazorMvc
@@ -32,6 +34,7 @@ namespace RazorMvc
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddSignalR();
 
             services.AddControllersWithViews();
             services.AddScoped<IInternshipService, InternshipDbService>();
@@ -76,6 +79,7 @@ namespace RazorMvc
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<MessageHub>("/messagehub");
             });
         }
     }
