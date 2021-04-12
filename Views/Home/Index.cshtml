@@ -11,6 +11,8 @@
     <script type="text/javascript" src="~/js/addNewcommers.js"></script>
     <script type="text/javascript" src="~/js/editNewcommer.js"></script>
     <script type="text/javascript" src="~/js/removeNewcommer.js"></script>
+    <script src="~/lib/microsoft-signalr/signalr.js"></script>
+    <script src="~/js/subscribeOnChanges.js"></script>
 }
 
 @section modalWindows {
@@ -48,13 +50,13 @@
     {
         var member = Model[i];
 
-    <li class="member" member-id="@member.Id">
-        <div class="memberInfo">
-            <span class="name">@member.Name</span><i class="delete fa fa-remove"></i>
-            <i class="startEdit fa fa-pencil" data-toggle="modal" data-target="#editClassmate"></i>
-        </div>
-    </li>
-}
+        <li class="member" member-id="@member.Id">
+            <div class="memberInfo">
+                <span class="name">@member.Name</span><i class="delete fa fa-remove"></i>
+                <i class="startEdit fa fa-pencil" data-toggle="modal" data-target="#editClassmate"></i>
+            </div>
+        </li>
+    }
 </ul>
 
 <input id="newcomer" title="Name" type="text" />
