@@ -1,4 +1,5 @@
 ﻿using RazorMvc.Data;
+using RazorMvc.Hubs;
 using RazorMvc.Models;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,19 @@ namespace RazorMvc.Services
     public class InternshipDbService : IInternshipService
     {
         private readonly InternDbContext db;
+        private readonly List<IAddMemberSubscriber> subscribers;
 
         public InternshipDbService(InternDbContext db)
         {
             this.db = db;
+            subscribers = new List<IAddMemberSubscriber>();
         }
 
         public Intern AddMember(Intern member)
         {
             db.Interns.AddRange(member);
             db.SaveChanges();
+            subscribers.ForEach(subscriber => subscriber.OnAddMember(member));
             return member;
         }
 
@@ -39,6 +43,11 @@ namespace RazorMvc.Services
             var intern = db.Find<Intern>(id);
             db.Remove<Intern>(intern);
             db.SaveChanges();
+        }
+
+        public void SubscribeToAddMember(IAddMemberSubscriber subscribers)
+        {
+            this.subscribers.Add(subscribers);
         }
 
         public void UpdateMember(Intern intern)
