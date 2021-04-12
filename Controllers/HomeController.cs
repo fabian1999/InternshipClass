@@ -14,12 +14,13 @@ namespace RazorMvc.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IInternshipService internshipService;
-        private readonly InternDbContext db;
+        private readonly MessageService messageService;
 
-        public HomeController(ILogger<HomeController> logger, IInternshipService internshipService)
+        public HomeController(ILogger<HomeController> logger, IInternshipService internshipService, MessageService messageService)
         {
             this.internshipService = internshipService;
             _logger = logger;
+            this.messageService = messageService;
         }
 
         public IActionResult Index()
@@ -35,7 +36,7 @@ namespace RazorMvc.Controllers
 
         public IActionResult Chat()
         {
-            return View();
+            return View(messageService.GetAllMessages());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

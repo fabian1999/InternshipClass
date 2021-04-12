@@ -35,6 +35,7 @@ namespace RazorMvc
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSignalR();
+            services.AddSingleton<MessageService>();
 
             services.AddControllersWithViews();
             services.AddScoped<IInternshipService, InternshipDbService>();
