@@ -18,19 +18,25 @@ namespace RazorMvc.Services
 
         public void RemoveMember(int id)
         {
-            var itemToBeDeleted = _internshipClass.Members.Single(_ => _.Id == id);
+            var itemToBeDeleted = GetMemberById(id);
             _internshipClass.Members.Remove(itemToBeDeleted);
         }
 
         public void UpdateMember(Intern intern)
         {
-            var itemToBeUpdated = _internshipClass.Members.Single(_ => _.Id == intern.Id);
+            var itemToBeUpdated = GetMemberById(intern.Id);
             itemToBeUpdated.Name = intern.Name;
         }
 
         public IList<Intern> GetMembers()
         {
             return _internshipClass.Members;
+        }
+
+        public Intern GetMemberById(int id)
+        {
+            var member = _internshipClass.Members.Single(_ => _.Id == id);
+            return member;
         }
     }
 }

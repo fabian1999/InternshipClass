@@ -10,12 +10,10 @@ namespace RazorMvc.Hubs
 {
     public class MessageHub : Hub
     {
-        private readonly IInternshipService internshipService;
         private readonly MessageService messageService;
 
         public MessageHub(MessageService messageService, IInternshipService internshipService)
         {
-            this.internshipService = internshipService;
             this.messageService = messageService;
         }
 

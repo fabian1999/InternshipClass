@@ -24,9 +24,9 @@ namespace RazorMvc.Services
             return member;
         }
 
-        public InternshipClass GetClass()
+        public Intern GetMemberById(int id)
         {
-            throw new NotImplementedException();
+            return db.Find<Intern>(id);
         }
 
         public IList<Intern> GetMembers()
@@ -37,7 +37,7 @@ namespace RazorMvc.Services
 
         public void RemoveMember(int id)
         {
-            var intern = db.Find<Intern>(id);
+            var intern = GetMemberById(id);
             db.Remove<Intern>(intern);
             db.SaveChanges();
         }
