@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using RazorMvc.Data;
+using RazorMvc.Hubs;
 using RazorMvc.Models;
 using RazorMvc.Services;
 
@@ -13,13 +15,15 @@ namespace RazorMvc.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
+        private readonly IHubContext<MessageHub> hubContext;
         private readonly IInternshipService internshipService;
         private readonly MessageService messageService;
 
-        public HomeController(ILogger<HomeController> logger, IInternshipService internshipService, MessageService messageService)
+        public HomeController(ILogger<HomeController> logger, IInternshipService internshipService, IHubContext<MessageHub> hubContext, MessageService messageService)
         {
             this.internshipService = internshipService;
             _logger = logger;
+            this.hubContext = hubContext;
             this.messageService = messageService;
         }
 
@@ -57,7 +61,9 @@ namespace RazorMvc.Controllers
             Intern intern = new Intern();
             intern.Name = memberName;
             intern.DateOfJoin = DateTime.Now;
-            return internshipService.AddMember(intern);
+            var newMember = internshipService.AddMember(intern);
+            hubContext.Clients.All.SendAsync("AddMember", newMember.Name, newMember.Id);
+            return newMember;
         }
 
         [HttpPut]
