@@ -53,6 +53,11 @@ namespace RazorMvc.Controllers
         public void Put(int id, [FromBody] Intern intern)
         {
             intern.Id = id;
+            if (intern.DateOfJoin == DateTime.MinValue)
+            {
+                intern.DateOfJoin = DateTime.Now;
+            }
+
             internshipService.UpdateMember(intern);
         }
 

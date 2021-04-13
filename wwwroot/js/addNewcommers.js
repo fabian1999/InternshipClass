@@ -6,7 +6,10 @@ $(document).ready(function () {
 
         // Remember string interpolation
         $.ajax({
-            url: `/Home/AddMember?memberName=${newcomerName}`,
+            contentType: 'application/json',
+            data: JSON.stringify({ "Name": `${newcomerName}` }),
+            method: "POST",
+            url: 'api/Internship/',
             success: function (data) {
                 $("#newcomer").val("");
             },

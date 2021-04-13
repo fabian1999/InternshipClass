@@ -18,8 +18,10 @@
         var index = $('#editClassmate').attr("memberIndex");
 
         $.ajax({
-            url: `/Home/UpdateMember?id=${id}&memberName=${newName}`,
-            type: "PUT",
+            contentType: 'application/json',
+            data: JSON.stringify({ "Name": `${newName}` }),
+            method: "PUT",
+            url: `api/Internship/${id}`,
             success: function (response) {
                 $('.name').eq(index).replaceWith(newName);
             },
