@@ -59,6 +59,7 @@ namespace RazorMvc.Controllers
             }
 
             internshipService.UpdateMember(intern);
+            hubContext.Clients.All.SendAsync("UpdateMember", intern.Name, intern.Id);
         }
 
         // DELETE api/<InternshipController>/5
