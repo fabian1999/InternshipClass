@@ -21,5 +21,17 @@ namespace RazorMvc.Tests
             // Assert
             Assert.Equal("Server=ec2-99-80-200-225.eu-west-1.compute.amazonaws.com;Port=5432;Database=d8d5aqlqcjhihh;User Id=bqjpqcfqbbhepw;Password=54f6615f773ba7613508f0b8fd1ad9a8292e5a2097f2eae2e5e753e239407f1c;Pooling=true;SSL Mode=Require;Trust Server Certificate=True;", herokuConnectionString);
         }
+
+        [Fact]
+        public void ShouldThrowExceptionOnCorruptUrl()
+        {
+            // Assume
+            var url = "Server=127.0.0.1;Port=5432;Database=internshipclass;User Id=internshipclassadmin;Password=Usn5FfpifcqTJFcMmjii;";
+
+            // Act & Assert
+            var exception = Assert.Throws<FormatException>(() => Startup.ConvertDatabaseUrlToHerokuString(url));
+
+            Assert.StartsWith("Database Url is not right format! Check this", exception.Message);
+        }
     }
 }
