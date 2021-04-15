@@ -17,9 +17,9 @@ namespace RazorMvc.Data
 
             var interns = new Intern[]
             {
-                new Intern { Id = 1, Name = "Fabian", DateOfJoin = DateTime.Parse("2021-04-01") },
-                new Intern { Id = 2, Name = "Teo", DateOfJoin = DateTime.Parse("2021-04-01") },
-                new Intern { Id = 3, Name = "Bobi", DateOfJoin = DateTime.Parse("2021-03-31") },
+                new Intern { Name = "Fabian", DateOfJoin = DateTime.Parse("2021-04-01") },
+                new Intern { Name = "Teo", DateOfJoin = DateTime.Parse("2021-04-01") },
+                new Intern { Name = "Bobi", DateOfJoin = DateTime.Parse("2021-03-31") },
             };
 
             context.Interns.AddRange(interns);
