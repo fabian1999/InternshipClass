@@ -17,9 +17,12 @@ namespace RazorMvc
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+
+        private string connectionString;
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            connectionString = env.IsDevelopment() ? Configuration.GetConnectionString("DefaultConnection") : Configuration.GetConnectionString("HerokuConnection");
         }
 
         public IConfiguration Configuration { get; }
@@ -29,10 +32,10 @@ namespace RazorMvc
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    connectionString));
             services.AddDbContext<InternDbContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    connectionString));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSignalR();
             services.AddSingleton<MessageService>();
