@@ -4,7 +4,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build
 
 connection.on("AddMember", function (user, id) {
     // Remember string interpolation
-    $("#list").append(`<li class="member" member-id="${id}"><div class="memberInfo"><span class="name">${user}</span><i class="delete fa fa-remove"></i><i class="startEdit fa fa-pencil" data-toggle="modal" data-target="#editClassmate"></i>/div>
+    $("#list").append(`<li class="member" member-id="${id}"><div class="memberInfo"><span class="name">${user}</span><i class="delete fa fa-remove"></i><i class="startEdit fa fa-pencil" data-toggle="modal" data-target="#editClassmate"></i></div>
 		        </li>`);
 });
 
