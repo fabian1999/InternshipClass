@@ -19,10 +19,30 @@ namespace RazorMvc
     {
 
         private string connectionString;
+
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
-            connectionString = env.IsDevelopment() ? Configuration.GetConnectionString("DefaultConnection") : Configuration.GetConnectionString("HerokuConnection");
+            connectionString = env.IsDevelopment() ? Configuration.GetConnectionString("DefaultConnection") : GetConnectionString();
+        }
+
+        public static string ConvertDatabaseUrlToHerokuString(string envDatabaseUrl)
+        {
+            Uri url;
+            bool isUrl = Uri.TryCreate(envDatabaseUrl, UriKind.Absolute, out url);
+            if (isUrl)
+            {
+                return $"Server={url.Host};Port={url.Port};Database={url.LocalPath.Substring(1)};User Id={url.UserInfo.Split(':')[0]};Password={url.UserInfo.Split(':')[1]};Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
+            }
+
+            throw new FormatException($"Database Url is not right format! Check this {envDatabaseUrl}.");
+        }
+
+        private string GetConnectionString()
+        {
+            var envDatabaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+            var herokuConnectionString = ConvertDatabaseUrlToHerokuString(envDatabaseUrl);
+            return herokuConnectionString;
         }
 
         public IConfiguration Configuration { get; }
