@@ -62,6 +62,14 @@ namespace RazorMvc.WebAPI.Controllers
         {
             var json = JObject.Parse(content);
             var jsonArray = json["daily"];
+
+            if (jsonArray == null)
+            {
+                var codToken = json["cod"];
+                var messageToken = json["message"];
+                throw new Exception($"Weather API doesn't work. Please check the Weather API : {messageToken}({codToken})");
+            }
+
             var weatherForecasts = new List<WeatherForecast>();
             foreach (var item in jsonArray)
             {
