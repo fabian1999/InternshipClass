@@ -36,7 +36,7 @@ namespace RazorMvc.WebAPI.Controllers
         /// <summary>
         /// Getting Weather Forecast for five days for default location.
         /// </summary>
-        /// <returns>Enumerable of weatherForecast objects.</returns>
+        /// <returns>List of weatherForecast objects.</returns>
         [HttpGet]
         public List<WeatherForecast> Get()
         {
@@ -45,6 +45,12 @@ namespace RazorMvc.WebAPI.Controllers
             return weatherForecasts.GetRange(1, 5);
         }
 
+        /// <summary>
+        /// Getting Weather Forecast for today + 7 days ahead for specific location.
+        /// </summary>
+        /// <param name="lat">It should be between -90 and 90. For example: latitude for Brasov is 45.75</param>
+        /// <param name="lon">It should be between -180 and 180. For example: longitude for Brasov is 25.3333</param>
+        /// <returns>List of weatherForecast objects.</returns>
         [HttpGet("/forecast")]
         public List<WeatherForecast> Get(double lat, double lon)
         {
