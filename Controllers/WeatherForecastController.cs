@@ -19,32 +19,35 @@ namespace RazorMvc.WebAPI.Controllers
     {
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IConfiguration configuration;
+
+        private readonly double lat;
+        private readonly double lon;
+        private readonly string apiKey;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
-            this.configuration = configuration;
+
+            this.lat = double.Parse(configuration["WeatherForecast:Latitude"], CultureInfo.InvariantCulture);
+            this.lon = double.Parse(configuration["WeatherForecast:Longitude"], CultureInfo.InvariantCulture);
+            this.apiKey = configuration["WeatherForecast:ApiKey"];
         }
 
         /// <summary>
-        /// Getting Weather Forecast for five days.
+        /// Getting Weather Forecast for five days for default location.
         /// </summary>
         /// <returns>Enumerable of weatherForecast objects.</returns>
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public List<WeatherForecast> Get()
         {
-            var weatherForecasts = FetchWeatherForecasts();
+            var weatherForecasts = Get(lat, lon);
 
             return weatherForecasts.GetRange(1, 5);
         }
 
         [HttpGet("/forecast")]
-        public List<WeatherForecast> FetchWeatherForecasts()
+        public List<WeatherForecast> Get(double lat, double lon)
         {
-            double lat = double.Parse(configuration["WeatherForecast:Latitude"], CultureInfo.InvariantCulture);
-            double lon = double.Parse(configuration["WeatherForecast:Longitude"], CultureInfo.InvariantCulture);
-            var apiKey = configuration["WeatherForecast:ApiKey"];
 
             var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;

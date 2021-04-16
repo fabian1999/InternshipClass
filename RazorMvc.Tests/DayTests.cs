@@ -41,10 +41,10 @@ namespace RazorMvc.Tests
             WeatherForecastController weatherForecastController = InstantiateWeatherForecastController();
 
             // Act
-            var weatherForecasts = weatherForecastController.FetchWeatherForecasts();
+            var weatherForecasts = weatherForecastController.Get();
 
             // Assert
-            Assert.Equal(8, weatherForecasts.Count);
+            Assert.Equal(5, weatherForecasts.Count);
         }
 
         [Fact]
