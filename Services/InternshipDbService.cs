@@ -77,5 +77,14 @@ namespace RazorMvc.Services
             db.Interns.Update(itemToBeUpdated);
             db.SaveChanges();
         }
+
+        public void UpdateLocation(int id, int locationId)
+        {
+            var intern = db.Find<Intern>(id);
+            var location = db.Find<Location>(locationId);
+
+            intern.Location = location;
+            db.SaveChanges();
+        }
     }
 }
