@@ -26,6 +26,13 @@ namespace RazorMvc
                 try
                 {
                     var context = services.GetRequiredService<InternDbContext>();
+                    var webHostEnviroment = services.GetRequiredService<IWebHostEnvironment>();
+                    if (webHostEnviroment.IsDevelopment())
+                    {
+                        context.Database.EnsureDeleted();
+                        context.Database.EnsureCreated();
+                    }
+
                     SeedData.Initialize(context);
                 }
                 catch (Exception ex)
