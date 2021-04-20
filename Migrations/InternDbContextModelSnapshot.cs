@@ -78,7 +78,7 @@ namespace RazorMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Location");
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("RazorMvc.Models.Project", b =>
@@ -102,7 +102,7 @@ namespace RazorMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Project");
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("InternProject", b =>

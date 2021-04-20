@@ -8,25 +8,8 @@ namespace RazorMvc.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Interns_Locations_LocationId",
-                table: "Interns");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Locations",
-                table: "Locations");
-
-            migrationBuilder.RenameTable(
-                name: "Locations",
-                newName: "Location");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Location",
-                table: "Location",
-                column: "Id");
-
             migrationBuilder.CreateTable(
-                name: "Project",
+                name: "Projects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -38,7 +21,7 @@ namespace RazorMvc.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Project", x => x.Id);
+                    table.PrimaryKey("PK_Projects", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,9 +41,9 @@ namespace RazorMvc.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InternProject_Project_ProjectsId",
+                        name: "FK_InternProject_Projects_ProjectsId",
                         column: x => x.ProjectsId,
-                        principalTable: "Project",
+                        principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -69,48 +52,15 @@ namespace RazorMvc.Migrations
                 name: "IX_InternProject_ProjectsId",
                 table: "InternProject",
                 column: "ProjectsId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Interns_Location_LocationId",
-                table: "Interns",
-                column: "LocationId",
-                principalTable: "Location",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Interns_Location_LocationId",
-                table: "Interns");
-
             migrationBuilder.DropTable(
                 name: "InternProject");
 
             migrationBuilder.DropTable(
-                name: "Project");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Location",
-                table: "Location");
-
-            migrationBuilder.RenameTable(
-                name: "Location",
-                newName: "Locations");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Locations",
-                table: "Locations",
-                column: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Interns_Locations_LocationId",
-                table: "Interns",
-                column: "LocationId",
-                principalTable: "Locations",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                name: "Projects");
         }
     }
 }
