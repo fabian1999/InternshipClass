@@ -48,5 +48,13 @@ namespace RazorMvc.Controllers
         {
             employeeService.RemoveEmployee(id);
         }
+
+        // PUT employee/<EmployeeController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] Employee employee)
+        {
+            employee.Id = id;
+            employeeService.UpdateEmployee(employee);
+        }
     }
 }

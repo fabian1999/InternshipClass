@@ -37,6 +37,17 @@ namespace RazorMvc.Services
             return db.Find<Employee>(id);
         }
 
+        public void UpdateEmployee(Employee employee)
+        {
+            var itemToBeUpdated = GetEmployeeById(employee.Id);
+            itemToBeUpdated.FirstName = employee.FirstName;
+            itemToBeUpdated.LastName = employee.LastName;
+            itemToBeUpdated.Email = employee.Email;
+
+            db.Employees.Update(itemToBeUpdated);
+            db.SaveChanges();
+        }
+
         public void RemoveEmployee(int id)
         {
             var employee = GetEmployeeById(id);
